@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - Epicshit Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #060913; color: #ffffff; min-height: 100vh; overflow-x: hidden; position: relative; }
+
+        body::before {
+            content: ''; position: absolute;
+            width: 600px; height: 600px; top: -150px; right: -100px;
+            background: radial-gradient(circle, rgba(244,162,22,0.06) 0%, rgba(6,9,19,0) 70%);
+            z-index: 0; pointer-events: none;
+        }
+
+        body::after {
+            content: ''; position: absolute;
+            width: 800px; height: 800px; bottom: -200px; left: -200px;
+            background: radial-gradient(circle, rgba(244,162,22,0.04) 0%, rgba(6,9,19,0) 75%);
+            z-index: 0; pointer-events: none;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 10%; position: fixed; width: 100%; top: 0; left: 0;
+            z-index: 1000; background: rgba(6,9,13,0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-decoration: none; }
+        .epic { color: #ffffff; font-weight: 400; }
+        .shit { color: #f4a216; }
+
+        .nav-container { display: flex; align-items: center; gap: 40px; }
+        .nav-links { display: flex; list-style: none; gap: 35px; }
+
+        .nav-links a {
+            text-decoration: none; color: #64748b;
+            font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+            transition: all 0.4s ease; position: relative;
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -6px; left: 50%; transform: translateX(-50%);
+            background-color: #f4a216; transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: #ffffff; }
+
+        /* --- HERO --- */
+        .pricing-hero {
+            padding: 200px 10% 40px 10%;
+            text-align: center; position: relative; z-index: 1;
+        }
+
+        .tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(244,162,22,0.04); border: 1px solid rgba(244,162,22,0.15);
+            color: #f4a216; padding: 6px 16px; border-radius: 100px;
+            font-size: 11px; font-weight: 600; margin-bottom: 25px;
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        .pricing-hero h1 { font-size: 56px; font-weight: 700; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.2; }
+
+        .pricing-hero h1 span {
+            background: linear-gradient(135deg, #ffffff 40%, #f4a216 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-hero p { font-size: 16px; color: #64748b; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+        /* --- PRICING CARDS --- */
+        .pricing-section { padding: 20px 10% 120px 10%; position: relative; z-index: 1; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; align-items: stretch; }
+
+        .price-card {
+            background: #0b0f19; border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 32px; padding: 50px 40px;
+            display: flex; flex-direction: column; position: relative;
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .price-card:hover { transform: translateY(-6px); }
+
+        .price-card.featured { border-color: #f4a216; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+        .popular-badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: #f4a216; color: #060913;
+            padding: 6px 18px; border-radius: 100px;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .plan-name { font-size: 24px; font-weight: 600; color: #ffffff; margin-bottom: 10px; }
+
+        .plan-price {
+            font-size: 52px; font-weight: 700; color: #ffffff;
+            margin-bottom: 15px; display: flex; align-items: baseline;
+        }
+
+        .plan-price span { font-size: 14px; color: #64748b; font-weight: 400; margin-left: 2px; }
+
+        .plan-desc { font-size: 13.5px; color: #64748b; line-height: 1.6; margin-bottom: 40px; min-height: 44px; }
+
+        .plan-features { list-style: none; margin-bottom: 45px; flex-grow: 1; }
+
+        .plan-features li { font-size: 14px; color: #ffffff; margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+
+        .plan-features li i.fa-check { color: #f4a216; font-size: 13px; }
+
+        .price-btn {
+            display: block; text-align: center; text-decoration: none;
+            padding: 16px 30px; border-radius: 16px;
+            font-size: 14px; font-weight: 600; transition: all 0.3s ease;
+        }
+
+        .btn-muted { background: #161f30; color: #ffffff; border: 1px solid transparent; }
+        .btn-muted:hover { background: #1e293b; }
+
+        .btn-solid { background: #f4a216; color: #060913; border: 1px solid #f4a216; }
+        .btn-solid:hover { background: #e09112; border-color: #e09112; box-shadow: 0 0 20px rgba(244,162,22,0.2); }
+
+        .pricing-note { text-align: center; margin-top: 60px; font-size: 14px; color: #475569; }
+        .pricing-note a { color: #f4a216; text-decoration: none; }
+
+        /* --- FOOTER --- */
+        .footer { background-color: #03050a; padding: 120px 10% 40px 10%; border-top: 1px solid rgba(255,255,255,0.01); position: relative; z-index: 1; }
+        .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; margin-bottom: 80px; }
+        .footer-col { flex: 1; min-width: 200px; }
+        .brand-column { max-width: 350px; }
+        .brand-column p { font-size: 14px; color: #475569; line-height: 1.7; margin: 25px 0 30px 0; }
+        .social-row { display: flex; gap: 14px; }
+
+        .social-circle {
+            width: 38px; height: 38px; background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.04); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #64748b; text-decoration: none; font-size: 13px;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .social-circle:hover { background-color: #ffffff; color: #060913; border-color: #ffffff; transform: translateY(-3px); }
+
+        .footer-col h4 { font-size: 14px; font-weight: 600; color: #ffffff; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 16px; }
+        .footer-col ul li a { color: #475569; text-decoration: none; font-size: 13.5px; transition: color 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+        .footer-col ul li a:hover { color: #f4a216; }
+
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.02); font-size: 13px; color: #334155; }
+
+        .footer-bottom-links a { color: #334155; text-decoration: none; margin-left: 28px; transition: color 0.3s; }
+        .footer-bottom-links a:hover { color: #ffffff; }
+
+        .widget-scroll-up {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04);
+            color: #64748b; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 999; text-decoration: none; transition: all 0.3s;
+        }
+
+        .widget-scroll-up:hover { background-color: #ffffff; color: #060913; border-color: #ffffff; }
+
+        @media(max-width: 1024px) {
+            .navbar { padding: 25px 5%; }
+            .pricing-hero { padding-left: 5%; padding-right: 5%; }
+            .pricing-section { padding-left: 5%; padding-right: 5%; }
+            .pricing-grid { grid-template-columns: 1fr 1fr; gap: 25px; }
+            .price-card { padding: 40px 30px; }
+            .footer { padding-left: 5%; padding-right: 5%; }
+        }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .pricing-hero h1 { font-size: 38px; }
+            .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 15px; }
+            .footer-bottom-links a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="epicshit.html" class="logo">
+        <span class="epic">EPIC</span><span class="shit">SHIT</span>
+    </a>
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="epicshit.html">Home</a></li>
+            <li><a href="aboutpage.html">About</a></li>
+            <li><a href="pricingpage.html" class="active">Pricing</a></li>
+            <li><a href="faqpage.html">FAQ</a></li>
+            <li><a href="contactpage.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="pricing-hero">
+    <div class="tag">Investment Frameworks</div>
+    <h1>Transparent Pricing For<br><span>Elite Digital Performance</span></h1>
+    <p>No unexpected hidden parameters. Uncompromised production quality engineered to generate scalable, long-term brand equity.</p>
+</section>
+
+<section class="pricing-section">
+    <div class="pricing-grid">
+        <div class="price-card">
+            <div class="plan-name">Basic</div>
+            <p class="plan-desc">Perfect for small businesses just getting started online.</p>
+            <div class="plan-price">$159<span>/project</span></div>
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> 1-3 Page Website</li>
+                <li><i class="fas fa-check"></i> Mobile Responsive</li>
+                <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+                <li><i class="fas fa-check"></i> Contact Form</li>
+                <li><i class="fas fa-check"></i> 1 Week Delivery</li>
+            </ul>
+            <a href="contactpage.html" class="price-btn btn-muted">Get Started</a>
+        </div>
+
+        <div class="price-card featured">
+            <div class="popular-badge">Most Popular</div>
+            <div class="plan-name">Premium</div>
+            <p class="plan-desc">Ideal for growing businesses needing more features and pages.</p>
+            <div class="plan-price">$259<span>/project</span></div>
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Up to 10 Pages</li>
+                <li><i class="fas fa-check"></i> Custom Animations</li>
+                <li><i class="fas fa-check"></i> Advanced SEO</li>
+                <li><i class="fas fa-check"></i> CMS Integration</li>
+                <li><i class="fas fa-check"></i> Analytics Setup</li>
+                <li><i class="fas fa-check"></i> Priority Support</li>
+            </ul>
+            <a href="contactpage.html" class="price-btn btn-solid">Get Started</a>
+        </div>
+
+        <div class="price-card">
+            <div class="plan-name">Epic Shit</div>
+            <p class="plan-desc">Comprehensive solution for established enterprises and e-commerce.</p>
+            <div class="plan-price">$359<span>/project</span></div>
+            <ul class="plan-features">
+                <li><i class="fas fa-check"></i> Unlimited Pages</li>
+                <li><i class="fas fa-check"></i> E-commerce Functionality</li>
+                <li><i class="fas fa-check"></i> Custom Web App Features</li>
+                <li><i class="fas fa-check"></i> Premium Performance</li>
+                <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
+                <li><i class="fas fa-check"></i> Ongoing Maintenance</li>
+            </ul>
+            <a href="contactpage.html" class="price-btn btn-muted">Get Started</a>
+        </div>
+    </div>
+
+    <div class="pricing-note">
+        Need an entirely tailored structural plan? <a href="contactpage.html">Let's coordinate custom project blueprints.</a>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-col brand-column">
+            <div class="logo">
+                <span class="epic">EPIC</span><span class="shit">SHIT</span>
+            </div>
+            <p>We design and develop modern, high-converting websites for businesses worldwide. Elevating digital experiences.</p>
+            <div class="social-row">
+                <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="epicshit.html">Home</a></li>
+                <li><a href="aboutpage.html">About</a></li>
+                <li><a href="pricingpage.html">Pricing</a></li>
+                <li><a href="faqpage.html">FAQ</a></li>
+                <li><a href="contactpage.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="#">Business Websites</a></li>
+                <li><a href="#">E-commerce Stores</a></li>
+                <li><a href="#">Landing Pages</a></li>
+                <li><a href="#">SEO Optimization</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+                <li><a href="mailto:akhillkd21@gmail.com"><i class="far fa-envelope"></i> akhillkd21@gmail.com</a></li>
+                <li><a href="mailto:epicshitwebstudio@gmail.com"><i class="far fa-envelope"></i> epicshitwebstudio@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Epic Shit Studio. All rights reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="widget-scroll-up"><i class="fas fa-arrow-up"></i></a>
+
+</body>
+</html>

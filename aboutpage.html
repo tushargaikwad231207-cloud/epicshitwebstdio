@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Epicshit Premium Digital Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #060913; color: #ffffff; min-height: 100vh; overflow-x: hidden; position: relative; }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            top: -200px; right: -100px;
+            background: radial-gradient(circle, rgba(244,162,22,0.06) 0%, rgba(6,9,19,0) 70%);
+            z-index: 0; pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 700px; height: 700px;
+            bottom: -200px; left: -200px;
+            background: radial-gradient(circle, rgba(244,162,22,0.04) 0%, rgba(6,9,19,0) 75%);
+            z-index: 0; pointer-events: none;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            position: fixed;
+            width: 100%; top: 0; left: 0;
+            z-index: 1000;
+            background: rgba(6,9,13,0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; cursor: pointer; }
+        .epic { color: #ffffff; font-weight: 400; }
+        .shit { color: #f4a216; }
+
+        .nav-container { display: flex; align-items: center; gap: 40px; }
+
+        .nav-links { display: flex; list-style: none; gap: 35px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 13px; font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: -6px; left: 50%;
+            transform: translateX(-50%);
+            background-color: #f4a216;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: #ffffff; }
+
+        /* --- HERO --- */
+        .about-hero {
+            padding: 200px 10% 100px 10%;
+            text-align: center;
+            position: relative; z-index: 1;
+        }
+
+        .tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(244,162,22,0.04);
+            border: 1px solid rgba(244,162,22,0.15);
+            color: #f4a216;
+            padding: 6px 16px; border-radius: 100px;
+            font-size: 11px; font-weight: 600;
+            margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        .about-hero h1 { font-size: 64px; font-weight: 700; letter-spacing: -2px; line-height: 1.2; margin-bottom: 20px; }
+
+        .about-hero h1 span {
+            background: linear-gradient(135deg, #ffffff 30%, #f4a216 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero p { font-size: 16px; color: #64748b; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+        /* --- STORY --- */
+        .story-section {
+            padding: 60px 10% 120px 10%;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 80px; align-items: center;
+            position: relative; z-index: 1;
+        }
+
+        .story-content h2 { font-size: 36px; font-weight: 700; margin-bottom: 25px; letter-spacing: -1px; }
+        .story-content p { font-size: 15px; color: #94a3b8; line-height: 1.8; margin-bottom: 20px; }
+
+        .skills-container { margin-top: 40px; }
+        .skill-item { margin-bottom: 25px; }
+
+        .skill-info { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; margin-bottom: 10px; letter-spacing: 0.5px; }
+        .skill-info span:first-child { color: #ffffff; }
+        .skill-info span:last-child { color: #f4a216; }
+
+        .skill-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.03); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.01); }
+        .skill-bar-fill { height: 100%; background: #f4a216; border-radius: 20px; width: 0; transition: width 1.5s cubic-bezier(0.16,1,0.3,1); }
+
+        /* --- BENTO --- */
+        .bento-showcase { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+        .bento-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.02);
+            border-radius: 24px; padding: 40px;
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .bento-card:hover { border-color: rgba(244,162,22,0.25); background: rgba(255,255,255,0.02); transform: translateY(-5px); }
+
+        .bento-card.tall {
+            grid-row: span 2;
+            background: linear-gradient(180deg, rgba(244,162,22,0.05) 0%, rgba(6,9,19,0) 100%);
+            border-color: rgba(244,162,22,0.1);
+        }
+
+        .bento-card i { font-size: 24px; color: #f4a216; margin-bottom: 40px; }
+        .bento-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+        .bento-card p { font-size: 13.5px; color: #475569; line-height: 1.6; }
+        .bento-card:hover p { color: #94a3b8; }
+
+        /* --- VISION --- */
+        .vision-banner {
+            margin: 40px 10% 120px 10%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.01) 0%, rgba(244,162,22,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.02);
+            border-radius: 32px; padding: 80px 60px;
+            text-align: center; position: relative; z-index: 1; overflow: hidden;
+        }
+
+        .vision-banner::before {
+            content: '"'; position: absolute;
+            font-size: 240px; color: rgba(244,162,22,0.03);
+            font-family: serif; top: -40px; left: 40px; line-height: 1;
+        }
+
+        .vision-banner h2 { font-size: 32px; font-weight: 600; max-width: 800px; margin: 0 auto; line-height: 1.6; letter-spacing: -0.5px; }
+        .vision-banner p { font-size: 12px; color: #f4a216; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; margin-top: 30px; }
+
+        /* --- FOOTER --- */
+        .footer { background-color: #03050a; padding: 100px 10% 40px 10%; border-top: 1px solid rgba(255,255,255,0.01); position: relative; z-index: 1; }
+        .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 50px; margin-bottom: 60px; }
+        .footer-col { flex: 1; min-width: 200px; }
+        .brand-column { max-width: 350px; }
+        .brand-column p { font-size: 14px; color: #475569; line-height: 1.7; margin: 25px 0; }
+        .social-row { display: flex; gap: 12px; }
+
+        .social-circle {
+            width: 38px; height: 38px;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            color: #64748b; text-decoration: none; font-size: 13px; transition: all 0.3s ease;
+        }
+
+        .social-circle:hover { background-color: #ffffff; color: #060913; border-color: #ffffff; transform: translateY(-3px); }
+
+        .footer-col h4 { font-size: 14px; font-weight: 600; color: #ffffff; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #475569; text-decoration: none; font-size: 13.5px; transition: color 0.3s; }
+        .footer-col ul li a:hover { color: #f4a216; }
+
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.02); font-size: 13px; color: #334155; }
+
+        .widget-scroll-up {
+            position: fixed; bottom: 40px; right: 40px;
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04);
+            color: #64748b; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 999; text-decoration: none; transition: all 0.3s;
+        }
+
+        .widget-scroll-up:hover { background-color: #ffffff; color: #060913; border-color: #ffffff; }
+
+        @media(max-width: 1024px) {
+            .story-section { grid-template-columns: 1fr; gap: 50px; padding-left: 5%; padding-right: 5%; }
+            .about-hero { padding-left: 5%; padding-right: 5%; }
+            .vision-banner { margin: 40px 5% 100px 5%; padding: 60px 30px; }
+            .footer { padding-left: 5%; padding-right: 5%; }
+        }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .about-hero h1 { font-size: 44px; }
+            .bento-showcase { grid-template-columns: 1fr; }
+            .bento-card.tall { grid-row: auto; }
+            .vision-banner h2 { font-size: 22px; }
+            .footer-top { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="epic">EPIC</span><span class="shit">SHIT</span>
+    </div>
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="epicshit.html">Home</a></li>
+            <li><a href="aboutpage.html" class="active">About</a></li>
+            <li><a href="pricingpage.html">Pricing</a></li>
+            <li><a href="faqpage.html">FAQ</a></li>
+            <li><a href="contactpage.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="about-hero">
+    <div class="tag">Who We Are</div>
+    <h1>We are a collective of creators,<br><span>designers, and digital strategists.</span></h1>
+    <p>We push boundaries to craft premium high-end web experiences that scale brands and define modern market leaders.</p>
+</section>
+
+<section class="story-section">
+    <div class="story-content">
+        <h2>We don't do boring. We build digital assets that convert.</h2>
+        <p>Founded with a radical vision to eliminate slow, generic template styling, Epic Shit Studio designs highly optimized, uniquely tailor-made functional interfaces.</p>
+        <p>We work at the cross-section of bleeding-edge visual identity design and clean performant web architectural development to unlock exponential business growth.</p>
+
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>UI/UX Interface Engineering</span>
+                    <span>95%</span>
+                </div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar-fill" data-progress="95%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Performance Optimization & SEO</span>
+                    <span>98%</span>
+                </div>
+                <div class="skill-bar-bg">
+                    <div class="skill-bar-fill" data-progress="98%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bento-showcase">
+        <div class="bento-card tall">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <div>
+                <h3>Our Core Philosophy</h3>
+                <p>Every pixel must serve a conversion milestone. Beauty without structural performance is useless.</p>
+            </div>
+        </div>
+        <div class="bento-card">
+            <i class="fa-solid fa-fingerprint"></i>
+            <div>
+                <h3>100% Bespoke Identity</h3>
+                <p>Zero templates used. Fully unrepeatable code architectures.</p>
+            </div>
+        </div>
+        <div class="bento-card">
+            <i class="fa-solid fa-bolt-lightning"></i>
+            <div>
+                <h3>Elite Speeds</h3>
+                <p>Optimized directly for flawless green Core Web Vitals scoring.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="vision-banner">
+    <h2>"The web is cluttered with digital noise. Our ultimate mandate is to build functional clarity that instantly captures focus and turns visitors into high-value loyal customers."</h2>
+    <p>Epic Shit Studio Mandate</p>
+</section>
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-col brand-column">
+            <div class="logo">
+                <span class="epic">EPIC</span><span class="shit">SHIT</span>
+            </div>
+            <p>We design and develop modern, high-converting websites for businesses worldwide. Elevating digital experiences.</p>
+            <div class="social-row">
+                <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="epicshit.html">Home</a></li>
+                <li><a href="aboutpage.html">About</a></li>
+                <li><a href="pricingpage.html">Pricing</a></li>
+                <li><a href="faqpage.html">FAQ</a></li>
+                <li><a href="contactpage.html">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="#">Business Websites</a></li>
+                <li><a href="#">E-commerce Stores</a></li>
+                <li><a href="#">Landing Pages</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+                <li><a href="mailto:akhillkd21@gmail.com"><i class="far fa-envelope"></i> akhillkd21@gmail.com</a></li>
+                <li><a href="mailto:epicshitwebstudio@gmail.com"><i class="far fa-envelope"></i> epicshitwebstudio@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Epic Shit Studio. All rights reserved.</p>
+    </div>
+</footer>
+
+<a href="#" class="widget-scroll-up"><i class="fas fa-arrow-up"></i></a>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const progressBars = document.querySelectorAll('.skill-bar-fill');
+        const animateProgress = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    bar.style.width = bar.getAttribute('data-progress');
+                    observer.unobserve(bar);
+                }
+            });
+        };
+        const barObserver = new IntersectionObserver(animateProgress, { threshold: 0.5 });
+        progressBars.forEach(bar => barObserver.observe(bar));
+    });
+</script>
+
+</body>
+</html>

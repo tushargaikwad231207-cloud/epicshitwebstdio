@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Epicshit Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- DESIGN SYSTEM RESETS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #060913; 
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- AMBIENT NEON GLOWS --- */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            top: -150px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(244, 162, 22, 0.06) 0%, rgba(6, 9, 19, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            bottom: -200px;
+            right: -200px;
+            background: radial-gradient(circle, rgba(244, 162, 22, 0.04) 0%, rgba(6, 9, 19, 0) 75%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- PRESTIGE STICKY NAVIGATION --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(6, 9, 13, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .epic { 
+            color: #ffffff; 
+            font-weight: 400;
+        }
+        .shit { 
+            color: #f4a216; 
+        } 
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b; 
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f4a216;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #ffffff;
+        }
+
+        .theme-icon {
+            color: #64748b;
+            cursor: pointer;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .theme-icon:hover { color: #f4a216; }
+
+        /* --- HEADER HEADER SECTION --- */
+        .services-hero {
+            padding: 200px 10% 80px 10%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(244, 162, 22, 0.04);
+            border: 1px solid rgba(244, 162, 22, 0.15);
+            color: #f4a216;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .services-hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        .services-hero h1 span {
+            background: linear-gradient(135deg, #ffffff 40%, #f4a216 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-hero p {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* --- DETAILED SERVICES DEEP DIVE --- */
+        .services-list-section {
+            padding: 40px 10% 120px 10%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .service-panel:last-child {
+            border-bottom: none;
+        }
+
+        .service-panel.reverse {
+            direction: rtl;
+        }
+
+        .service-panel.reverse .service-info-box {
+            direction: ltr;
+        }
+
+        .service-graphic-box {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.00) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 32px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s;
+        }
+
+        .service-panel:hover .service-graphic-box {
+            border-color: rgba(244, 162, 22, 0.2);
+        }
+
+        .service-graphic-box i {
+            font-size: 110px;
+            color: rgba(255, 255, 255, 0.02);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-panel:hover .service-graphic-box i {
+            color: #f4a216;
+            transform: scale(1.1) rotate(-5deg);
+            text-shadow: 0 0 50px rgba(244, 162, 22, 0.3);
+        }
+
+        .service-num {
+            position: absolute;
+            top: 40px;
+            left: 45px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #475569;
+            letter-spacing: 1px;
+        }
+
+        .service-info-box h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .service-info-box p {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .service-features-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .service-features-list li {
+            font-size: 14px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features-list li i {
+            color: #f4a216;
+            font-size: 12px;
+        }
+
+        /* --- REFINED STRUCTURAL STUDIO FOOTER --- */
+        .footer {
+            background-color: #03050a;
+            padding: 120px 10% 40px 10%;
+            border-top: 1px solid rgba(255, 255, 255, 0.01);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .brand-column {
+            max-width: 350px;
+        }
+
+        .brand-column p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.7;
+            margin: 25px 0 30px 0;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 14px;
+        }
+
+        .social-circle {
+            width: 38px;
+            height: 38px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .social-circle:hover {
+            background-color: #ffffff;
+            color: #060913;
+            border-color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul li a {
+            color: #475569;
+            text-decoration: none;
+            font-size: 13.5px;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: #f4a216;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .footer-bottom-links a {
+            color: #334155;
+            text-decoration: none;
+            margin-left: 28px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #ffffff;
+        }
+
+        /* --- STICKY OVERLAY INTERACTIVES --- */
+        .widget-scroll-up {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #64748b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .widget-scroll-up:hover {
+            background-color: #ffffff;
+            color: #060913;
+            border-color: #ffffff;
+        }
+
+        /* --- ADAPTIVE RESPONSIVE LAYOUT CONSTRAINTS --- */
+        @media(max-width: 1024px) {
+            .navbar { padding: 25px 5%; }
+            .services-hero { padding-left: 5%; padding-right: 5%; }
+            .services-list-section { padding-left: 5%; padding-right: 5%; }
+            .service-panel { gap: 40px; }
+            .footer { padding-left: 5%; padding-right: 5%; }
+        }
+
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .services-hero h1 { font-size: 38px; }
+            .service-panel, .service-panel.reverse { grid-template-columns: 1fr; gap: 40px; padding: 50px 0; direction: ltr; }
+            .service-panel.reverse .service-info-box { direction: ltr; }
+            .service-graphic-box { height: 280px; }
+            .service-graphic-box i { font-size: 80px; }
+            .service-info-box h2 { font-size: 28px; }
+            .service-features-list { grid-template-columns: 1fr; gap: 12px; }
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 15px; }
+            .footer-bottom-links a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <span class="epic">EPIC</span><span class="shit">SHIT</span>
+    </a>  
+    <div class="nav-container">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutpage.html">About</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="fa-regular fa-sun theme-icon"></i>
+    </div>
+</nav>
+
+<section class="services-hero">
+    <div class="tag">What We Do Best</div>
+    <h1>Our Premium <span>Digital Capabilities</span></h1>
+    <p>We combine strategic UX engineering with master-class performance setups to construct online assets that consistently scale your business margins.</p>
+</section>
+
+<section class="services-list-section">
+    <div class="service-panel">
+        <div class="service-graphic-box">
+            <span class="service-num">01 // CORE</span>
+            <i class="fas fa-desktop"></i>
+        </div>
+        <div class="service-info-box">
+            <h2>Corporate & Business Websites</h2>
+            <p>High-end corporate website structures developed uniquely for your market sector. We build interfaces with absolute structural fluidity, lightning fast asset packaging, and pixel-perfect responsiveness across absolute viewport variations.</p>
+            <ul class="service-features-list">
+                <li><i class="fas fa-check"></i> Bespoke UI/UX Design</li>
+                <li><i class="fas fa-check"></i> Advanced Web Vitals Focus</li>
+                <li><i class="fas fa-check"></i> CMS Integration (WordPress/Webflow)</li>
+                <li><i class="fas fa-check"></i> Global CDN Deployment</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="service-panel reverse">
+        <div class="service-graphic-box">
+            <span class="service-num">02 // SCALE</span>
+            <i class="fas fa-shopping-bag"></i>
+        </div>
+        <div class="service-info-box">
+            <h2>High-Conversion E-commerce Stores</h2>
+            <p>Maximize your transaction success frameworks. Our setups offer seamless, ultra-secure transaction gateways, custom fluid checkout mechanics, multi-currency processing layers, and intuitive stock indexing panels.</p>
+            <ul class="service-features-list">
+                <li><i class="fas fa-check"></i> Custom Shopify Development</li>
+                <li><i class="fas fa-check"></i> Optimized Checkout funnels</li>
+                <li><i class="fas fa-check"></i> Secure Vault API Gateways</li>
+                <li><i class="fas fa-check"></i> Automated Logistics APIs</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="service-panel">
+        <div class="service-graphic-box">
+            <span class="service-num">03 // GROW</span>
+            <i class="fas fa-bolt"></i>
+        </div>
+        <div class="service-info-box">
+            <h2>High-Impact Landing Pages</h2>
+            <p>Meticulously engineered lead acquisition environments structured exclusively to support performance marketing funnels. Built intentionally for hyper-fast initial load metrics to retain click traffic instantly.</p>
+            <ul class="service-features-list">
+                <li><i class="fas fa-check"></i> Split-Testing (A/B) Layouts</li>
+                <li><i class="fas fa-check"></i> Micro-Copy Psychology Hooking</li>
+                <li><i class="fas fa-check"></i> Direct CRM Webhooks</li>
+                <li><i class="fas fa-check"></i> Dynamic Keyword Insertion</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="service-panel reverse">
+        <div class="service-graphic-box">
+            <span class="service-num">04 // RANK</span>
+            <i class="fas fa-search-dollar"></i>
+        </div>
+        <div class="service-info-box">
+            <h2>Search Engine Optimization</h2>
+            <p>Dominate high-intent search visibility channels. We systematically optimize page architecture, schema markup datasets, technical accessibility frameworks, and organic topical authority strategies to generate permanent traffic funnels.</p>
+            <ul class="service-features-list">
+                <li><i class="fas fa-check"></i> Deep Schema & Microdata Markup</li>
+                <li><i class="fas fa-check"></i> Complex Core Technical Auditing</li>
+                <li><i class="fas fa-check"></i> Contextual Internal Linking</li>
+                <li><i class="fas fa-check"></i> Continuous Keyword Audits</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="footer-col brand-column">
+            <div class="logo">
+                <span class="epic">EPIC</span><span class="shit">SHIT</span>
+            </div>
+            <p>We design and develop modern, high-converting websites for businesses worldwide. Elevating digital experiences.</p>
+            <div class="social-row">
+                <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutpage.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="index.html#pricing">Pricing</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="services.html">Business Websites</a></li>
+                <li><a href="services.html">E-commerce Stores</a></li>
+                <li><a href="services.html">Landing Pages</a></li>
+                <li><a href="services.html">SEO Optimization</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul>
+                <li><a href="mailto:akhillkd21@gmail.com"><i class="far fa-envelope"></i> akhillkd21@gmail.com</a></li>
+                <li><a href="mailto:epicshitwebstudio@gmail.com"><i class="far fa-envelope"></i> epicshitwebstudio@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Epic Shit Studio. All rights reserved.</p>
+        <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="widget-scroll-up"><i class="fas fa-arrow-up"></i></a>
+
+</body>
+</html>
